@@ -27,10 +27,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# settings.py
+AUTH_USER_MODEL = 'JourneyTraining.UserModel'
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    'JourneyTraining.apps.JourneytrainingConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
