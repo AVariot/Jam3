@@ -1,71 +1,64 @@
 DROP TABLE IF EXISTS `butterfly`;
 CREATE TABLE `butterfly` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `series` int(11) NOT NULL,
-  `rep` int(11) NOT NULL,
-  `poids` float NOT NULL
+    `series` INT NOT NULL,
+    `rep` INT NOT NULL,
+    `poids` FLOAT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 CREATE TABLE `cardio` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `duree` int(11) NOT NULL,
-  `distance` int(11) NOT NULL
+    `duree` INT NOT NULL,
+    `distance` INT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 CREATE TABLE `curl` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `series` int(11) NOT NULL,
-  `rep` int(11) NOT NULL,
-  `poids` float NOT NULL
+    `series` INT NOT NULL,
+    `rep` INT NOT NULL,
+    `poids` FLOAT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 CREATE TABLE `curl_marteau` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `series` int(11) NOT NULL,
-  `rep` int(11) NOT NULL,
-  `poids` int(11) NOT NULL
+    `series` INT NOT NULL,
+    `rep` INT NOT NULL,
+    `poids` INT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 CREATE TABLE `dc` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `series` int(11) NOT NULL,
-  `rep` int(11) NOT NULL,
-  `poids` float NOT NULL
+    `series` INT NOT NULL,
+    `rep` INT NOT NULL,
+    `poids` FLOAT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 CREATE TABLE `dips` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `series` int(11) NOT NULL,
-  `rep` int(11) NOT NULL,
-  `poids` int(11) NOT NULL
+    `series` INT NOT NULL,
+    `rep` INT NOT NULL,
+    `poids` INT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 CREATE TABLE `fente` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `series` int(11) NOT NULL,
-  `rep` int(11) NOT NULL,
-  `poids` int(11) NOT NULL
+    `series` INT NOT NULL,
+    `rep` INT NOT NULL,
+    `poids` INT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 CREATE TABLE `squat` (
-  `series` int(11) NOT NULL,
-  `rep` int(11) NOT NULL,
-  `poids` int(11) NOT NULL
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `series` INT NOT NULL,
+    `rep` INT NOT NULL,
+    `poids` INT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 CREATE TABLE `tirage_pouli` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `series` int(11) NOT NULL,
-  `rep` int(11) NOT NULL,
-  `poids` int(11) NOT NULL
+    `series` INT NOT NULL,
+    `rep` INT NOT NULL,
+    `poids` INT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `exo` (
@@ -87,7 +80,15 @@ CREATE TABLE `exo` (
     FOREIGN KEY (dips_id) REFERENCES dips(id), 
     FOREIGN KEY (fente_id) REFERENCES fente(id), 
     FOREIGN KEY (squat_id) REFERENCES squat(id), 
-    FOREIGN KEY (tirage_pouli_id) REFERENCES tirage_pouli(id), 
-)
+    FOREIGN KEY (tirage_pouli_id) REFERENCES tirage_pouli(id)
+);
 
-CREATE TABLE ``
+CREATE TABLE `user` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `username` VARCHAR(20) NOT NULL,
+    `password` VARCHAR(20) NOT NULL,
+    `poids` INT,
+    `taille` INT,
+    `exo_id` INT,
+    FOREIGN KEY (exo_id) REFERENCES exo(id)
+);
