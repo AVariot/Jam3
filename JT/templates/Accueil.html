@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Votre Page</title>
+    <h1>Journey Training</h1>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #journey-training {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #1262b1;
+        }
+
+        #journey-training .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        #journey-training button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            color: #1262b1;
+        }
+
+        #training {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #894311;
+            margin-top: 20px;
+        }
+
+        #training button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #train-athlete {
+            /* Add your train athlete styles here */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <section id="journey-training">
+        <div class="logo">
+            <img src="images/logo.jpeg" alt="Logo">
+        </div>  
+        <div class="buttons">
+            <button id="contact">Contact</button>
+            <button id="login" onclick="location.href='{% url 'Login.html' %}'">Login</button>
+    </section>
+
+    <section id="training">
+        <div id="training-sessions">
+        </div>
+        <button id="add-training">Nouvelle scéance</button>
+        <button id="Continue">Continue</button>
+
+    <section id="train-athlete">
+    </section>
+</body>
+</html>
