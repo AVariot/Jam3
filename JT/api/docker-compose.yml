@@ -8,17 +8,45 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: jt
       MYSQL_USER: user
-      MYSQL_PASSWORD: user
+      MYSQL_PASSWORD: root
     ports:
-      - "5000:3306"
+      - "3306:3306"
     volumes:
-      - apiData:/var/lib/mysql
+      - dbData:/var/lib/mysql
+    networks:
+      - db
+
+  api:
+    build:
+      context: ./
+      dockerfile: api/Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    networks:
+      - db
+
+  web:
+    image: nginx:latest
+    build:
+      dockerfile: web/Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - db
+    volumes:
+      - ./web:/usr/share/nginx/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - "8080:8080"
+      - "8081:8080"
 
 volumes:
-  apiData:  
+  dbData:
+
+networks:
+  db:
