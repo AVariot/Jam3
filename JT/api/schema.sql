@@ -90,5 +90,6 @@ CREATE TABLE `user` (
     `poids` INT,
     `taille` INT,
     `exo_id` INT,
+    `streak` INT,
     FOREIGN KEY (exo_id) REFERENCES exo(id)
 );

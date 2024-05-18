@@ -46,6 +46,8 @@ services:
       - 8081:8080
     networks:
       - db
+    environment:
+      - ADMINER_DESIGN=hydra
 
 volumes:
   dbData:
