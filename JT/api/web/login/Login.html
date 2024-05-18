@@ -52,6 +52,12 @@ input{
 	outline: none;
 	border-radius: 5px;
 }
+.input-container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: -10px;
+}
+
 button{
 	width: 60%;
 	height: 40px;
@@ -62,7 +68,7 @@ button{
 	background: #109a06;
 	font-size: 1em;
 	font-weight: bold;
-	margin-top: 30px;
+	margin-top: 0px; /* reduced from 30px to 20px */
 	outline: none;
 	border: none;
 	border-radius: 5px;
@@ -94,6 +100,10 @@ button:hover{
 	transform: scale(.6);
 }
 
+.input-container input {
+	width: 45%; /* adjust as needed */
+}
+
     </style>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
@@ -105,8 +115,9 @@ button:hover{
 				<form>
 					<label for="chk" aria-hidden="true">Sign up</label>
 					<input type="text" name="txt" placeholder="User name" required="">
-					<input type="email" name="email" placeholder="Email" required="">
 					<input type="password" name="pswd" placeholder="Password" required="">
+						<input type="text" name="smallText1" placeholder="Taille (cm)" required="">
+						<input type="text" name="smallText2" placeholder="Poids (Kg)" required="">
 					<button>Sign up</button>
 				</form>
 			</div>
