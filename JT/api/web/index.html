@@ -516,17 +516,15 @@
       defer=""
       src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
     ></script>
-      <script>
-        document.getElementById('continueButton').addEventListener('click', function() {
-          alert('Continuer button clicked');
-          window.location.href = 'trainpage/train.html';
-        });
-      
-        document.getElementById('newSessionButton').addEventListener('click', function() {
-          alert('Nouvelle séance button clicked');
-          window.location.href = 'trainpage/train.html';
-        });
-      </script>
+    <script>
+      document.getElementById('continueButton').addEventListener('click', function() {
+        window.location.href = 'trainpage/train.html';
+      });
+    
+      document.getElementById('newSessionButton').addEventListener('click', function() {
+        window.location.href = 'select/select.html';
+      });
+    </script>
 
   </body>
   

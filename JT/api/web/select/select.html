@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Carousel</title>
+    <style>
+
+body {
+    background: linear-gradient(to top, #5aea5f, #f8f9fa);
+}
+
+        .carousel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .carousel img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .carousel .name {
+            text-align: center;
+            font-size: 2em;
+            margin-top: 20px;
+        }
+
+        .carousel-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn-conteiner {
+            cursor: pointer;
+        }
+
+        .btn-conteiner {
+  display: flex;
+  justify-content: center;
+  --color-text: #000000;
+  --color-background: #000000;
+  --color-outline: #00000080;
+  --color-shadow: #00000080;
+}
+
+.btn-conteiner {
+  display: flex;
+  justify-content: center;
+  --color-text: #9ee5fa;
+  --color-background: #353535;
+  --color-outline: #9ee5fa80;
+  --color-shadow: #00000080;
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  padding: 0px 3px;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 25px;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition: 1s;
+  border-radius: 100px;
+  box-shadow: 0 0 0.2em 0 var(--color-background);
+}
+
+.btn-content:hover,
+.btn-content:focus {
+  transition: 0.5s;
+  -webkit-animation: btn-content 1s;
+  animation: btn-content 1s;
+  outline: 0.1em solid transparent;
+  outline-offset: 0.2em;
+  box-shadow: 0 0 0.4em 0 var(--color-background);
+}
+
+.btn-content .icon-arrow {
+  transition: 0.5s;
+  margin-right: 0px;
+  transform: scale(0.6);
+}
+
+.btn-content:hover .icon-arrow {
+  transition: 0.5s;
+  margin-right: 25px;
+}
+
+.icon-arrow {
+  width: 20px;
+  margin-left: 15px;
+  position: relative;
+  top: 6%;
+}
+
+/* SVG */
+#arrow-icon-one {
+  transition: 0.4s;
+  transform: translateX(-60%);
+}
+
+#arrow-icon-two {
+  transition: 0.5s;
+  transform: translateX(-30%);
+}
+
+.btn-content:hover #arrow-icon-three {
+  animation: color_anim 1s infinite 0.2s;
+}
+
+.btn-content:hover #arrow-icon-one {
+  transform: translateX(0%);
+  animation: color_anim 1s infinite 0.6s;
+}
+
+.btn-content:hover #arrow-icon-two {
+  transform: translateX(0%);
+  animation: color_anim 1s infinite 0.4s;
+}
+
+/* SVG animations */
+@keyframes color_anim {
+  0% {
+    fill: white;
+  }
+
+  50% {
+    fill: var(--color-background);
+  }
+
+  100% {
+    fill: #9ee5fa;
+  }
+}
+
+/* Button animations */
+@-webkit-keyframes btn-content {
+  0% {
+    outline: 0.2em solid var(--color-background);
+    outline-offset: 0;
+  }
+}
+
+@keyframes btn-content {
+  0% {
+    outline: 0.2em solid var(--color-background);
+    outline-offset: 0;
+  }
+}
+
+
+button {
+ --color: #000000;
+ font-family: inherit;
+ display: inline-block;
+ width: 8em;
+ height: 2.6em;
+ line-height: 2.5em;
+ margin: 20px;
+ position: relative;
+ overflow: hidden;
+ border: 2px solid var(--color);
+ transition: color .5s;
+ z-index: 1;
+ font-size: 17px;
+ border-radius: 6px;
+ font-weight: 500;
+ color: var(--color);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* ajustez selon vos besoins */
+}
+
+
+button:before {
+ content: "";
+ position: absolute;
+ z-index: -1;
+ background: var(--color);
+ height: 150px;
+ width: 200px;
+ border-radius: 50%;
+}
+
+button:hover {
+ color: #ffffff;
+}
+
+button:before {
+ top: 100%;
+ left: 100%;
+ transition: all .7s;
+}
+
+button:hover:before {
+ top: -30px;
+ left: -30px;
+}
+
+button:active:before {
+ background: #3a0ca3;
+ transition: background 0s;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        <div class="btn-container">
+            <a href="#" class="btn-content" id="prev">
+                <span class="icon-arrow">
+                    <svg xmlns:xlink="http://www.w3.org/1999/xlink"
+                         xmlns="http://www.w3.org/2000/svg"
+                         version="1.1"
+                         viewBox="0 0 66 43"
+                         height="30px"
+                         width="30px">
+                        <g fill-rule="evenodd"
+                           fill="none"
+                           stroke-width="1"
+                           stroke="none"
+                           id="arrow">
+                            <path fill="#000000"
+                                  d="M25.8456067,3.89485454 L22.0236851,0.139296592 C21.8291689,-0.0518420739 21.5173671,-0.0518571125 21.3228325,0.139262789 L0.308386584,20.7848311 C-0.0855800656,21.1718824 -0.0911862953,21.8050225 0.295865023,22.1989893 C0.299981179,22.2031791 0.304134268,22.2073326 0.308323778,22.2114492 L21.322902,42.8607841 C21.5174043,43.0519059 21.8291758,43.0519358 22.0237147,42.8608513 L25.8454814,39.1069479 C26.0424848,38.9134427 26.0453207,38.5968729 25.8518155,38.3998695 C25.8497107,38.3977268 25.8475868,38.395603 25.8454438,38.3934985 L9.00622113,21.8567812 C8.80919719,21.6632968 8.80632798,21.3467273 8.99981237,21.1497035 C9.0019353,21.1475418 9.00407767,21.1453995 9.00623949,21.1432767 L25.8454792,4.60825197 C26.0425131,4.41477773 26.0453987,4.09820839 25.8519244,3.90117456 C25.8498374,3.89904911 25.8477314,3.89694235 25.8456067,3.89485454 Z"
+                                  id="arrow-icon-one"></path>
+                            <path fill="#000000"
+                                  d="M45.8456067,3.89485454 L42.0236851,0.139296592 C41.8291689,-0.0518420739 41.5173671,-0.0518571125 41.3228325,0.139262789 L20.3083866,20.7848311 C19.9144199,21.1718824 19.9088137,21.8050225 20.295865,22.1989893 C20.2999812,22.2031791 20.3041343,22.2073326 20.3083238,22.2114492 L41.322902,42.8607841 C41.5174043,43.0519059 41.8291758,43.0519358 42.0237147,42.8608513 L45.8454814,39.1069479 C46.0424848,38.9134427 46.0453207,38.5968729 45.8518155,38.3998695 C45.8497107,38.3977268 45.8475868,38.395603 45.8454438,38.3934985 L29.0062211,21.8567812 C28.8091972,21.6632968 28.806328,21.3467273 28.9998124,21.1497035 C29.0019353,21.1475418 29.0040777,21.1453995 29.0062395,21.1432767 L45.8454792,4.60825197 C46.0425131,4.41477773 46.0453987,4.09820839 45.8519244,3.90117456 C45.8498374,3.89904911 45.8477314,3.89694235 45.8456067,3.89485454 Z"
+                                  id="arrow-icon-two"></path>
+                        </g>
+                    </svg>
+                </span>
+            </a>
+
+          </div>
+          
+          <div class="carousel-content">
+            <img id="image" src="images/ngannou.webp">
+            <div class="name" id="name">Person 1</div>
+            <button> Select </button>
+        </div>
+        <div class="btn-container">
+            <a href="#" class="btn-content" id="next">
+              <span class="icon-arrow">
+                <svg
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  xmlns="http://www.w3.org/2000/svg"
+                  version="1.1"
+                  viewBox="0 0 66 43"
+                  height="30px"
+                  width="30px"
+                >
+                  <g
+                    fill-rule="evenodd"
+                    fill="none"
+                    stroke-width="1"
+                    stroke="none"
+                    id="arrow"
+                  >
+                  <path fill="#000000"
+                    d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
+                    id="arrow-icon-two"></path>
+              
+                    <path
+                      fill="#9ee5fa"
+                      d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
+                      id="arrow-icon-two"
+                    ></path>
+                  </g>
+                </svg>
+              </span>
+            </a>
+        </div>
+        
+    </div>
+
+    <script>
+        let images = ['images/ngannou.webp', 'images/toma_junior_popov.webp'];
+        let names = ['Francis Ngannou', 'Toma Junior Popov'];
+        let index = 0;
+
+        document.getElementById('prev').addEventListener('click', function() {
+            index = (index - 1 + images.length) % images.length;
+            updateImageAndName();
+        });
+
+        document.getElementById('next').addEventListener('click', function() {
+            index = (index + 1) % images.length;
+            updateImageAndName();
+        });
+
+        function updateImageAndName() {
+            document.getElementById('image').src = images[index];
+            document.getElementById('name').textContent = names[index];
+        }
+
+        updateImageAndName();
+    </script>
+</body>
+</html>
