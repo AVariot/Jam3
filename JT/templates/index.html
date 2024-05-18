@@ -3,8 +3,8 @@
 
 <html lang="en">
   <head>
-    <title>Grave Fussy Falcon</title>
-    <meta property="og:title" content="Grave Fussy Falcon" />
+    <title>JourneyTraining</title>
+    <meta property="og:title" content="JourneyTraining" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
     <meta property="twitter:card" content="summary_large_image" />
@@ -77,7 +77,7 @@
                   </span>
                 </nav>
                 <div class="navbar4-buttons">
-                  <button class="thq-button-filled"><span>Login</span></button>
+                  <button class="thq-button-filled" onclick="location.href='login/Login.html';">Login</button>
                   <button class="thq-button-outline">
                     <span>Logout</span>
                   </button>
@@ -119,13 +119,10 @@
                     <span class="thq-link thq-body-small">
                       <span>Contact</span>
                     </span>
-                    <span class="thq-link thq-body-small">
-                      <span>Link5</span>
-                    </span>
                   </nav>
                 </div>
                 <div class="navbar4-buttons1">
-                  <button class="thq-button-filled">Login</button>
+                    <button class="thq-button-filled" onclick="location.href='login/Login.html';">Login</button>
                   <button class="thq-button-outline">Register</button>
                 </div>
               </div>
@@ -148,16 +145,14 @@
                       </span>
                     </p>
                   </div>
-                  <div class="hero1-actions">
-                    <button class="thq-button-filled hero1-button">
-                      <span class="thq-body-small"><span>Continuer</span></span>
-                    </button>
-                    <button class="thq-button-outline hero1-button1">
-                      <span class="thq-body-small">
-                        <span>Nouvelle séance</span>
-                      </span>
-                    </button>
-                  </div>
+                    <div class="hero1-actions">
+                      <button id="continueButton" class="thq-button-filled hero1-button">
+                        <span class="btn"><span>Continuer</span></span>
+                      </button>
+                      <button id="newSessionButton" class="thq-button-outline hero1-button1">
+                        <span class="btn"><span>Nouvelle séance</span></span>
+                      </button>
+                    </div>
                 </div>
                 <img
                   src="public/external/banderole_jo-400w.jpeg"
@@ -199,7 +194,7 @@
                 <div class="gallery1-container1">
                   <img
                     alt="Entraînement de force et endurance"
-                    src="https://images.unsplash.com/photo-1708382339616-d092dbb84dd5?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcxNjAyMTg0NHw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                    src="images/flammeolympique.webp"
                     class="thq-img-ratio-4-3"
                   />
                 </div>
@@ -322,18 +317,14 @@
                     comme un athlète
                   </span>
                 </p>
-                <div class="cta1-actions">
-                  <button class="thq-button-filled cta1-button">
-                    <span class="cta1-action1 thq-body-small">
-                      <span>Continuer</span>
-                    </span>
+                <div class="hero1-actions">
+                  <button id="continueButton" class="thq-button-filled hero1-button">
+                    <span class="btn"><span>Continuer</span></span>
                   </button>
-                  <button class="thq-button-outline cta1-button1">
-                    <span class="cta1-action2 thq-body-small">
-                      <span>Nouvelle séance</span>
-                    </span>
+                  <button id="newSessionButton" class="thq-button-outline hero1-button1">
+                    <span class="btn"><span>Nouvelle séance</span></span>
                   </button>
-                </div>
+                </div>                
               </div>
             </div>
           </div>
@@ -513,7 +504,7 @@
                   </div>
                 </div>
                 <span class="footer15-content3 thq-body-small">
-                  <span>© 2023 Coach Sportif. Tous droits réservés.</span>
+                  <span>© 2023 JourneyTraining. Tous droits réservés.</span>
                 </span>
               </div>
             </div>
@@ -525,11 +516,18 @@
       defer=""
       src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
     ></script>
-    <script>
-      document.querySelector('.thq-button-filled').onclick = function () {
-          location.href = 'Login.html';
-      };
+      <script>
+        document.getElementById('continueButton').addEventListener('click', function() {
+          alert('Continuer button clicked');
+          window.location.href = 'trainpage/train.html';
+        });
+      
+        document.getElementById('newSessionButton').addEventListener('click', function() {
+          alert('Nouvelle séance button clicked');
+          window.location.href = 'trainpage/train.html';
+        });
       </script>
+
   </body>
   
 </html>
