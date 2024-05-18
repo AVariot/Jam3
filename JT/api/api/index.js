@@ -6,10 +6,12 @@ const db = require('./config/db.js');
 const jwt = require('jsonwebtoken');
 const secretKey = 'a2f4b978b4e89347e906b7c16ae3d9f98d3f67d9ed9e7a2f9b5f4c8a56e3b2d4';
 const seance = require('./seance.query.js')
+const cors = require('cors');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
@@ -139,20 +141,17 @@ app.get('/login', async (req, res) => {
 
 app.post('/signin', async (req, res) => {
     const { username, password, poids, taille } = req.body;
-    if (!username || !password || !poids || !taille) {
-        res.status(201).send({"msg": "Need 4 parameters"});
-    }
     try {
         db.execute("SELECT * FROM user WHERE username = ?", [username], function (err, resultat, fields) {
             if (err) {
-                res.status(500).send({"msg": "Error intern"})
+                res.status(500).send({"msg": err})
             }
             if (resultat.length >= 1) {
                 return res.status(409).send({ "msg": "User already exists" });
             }
             db.execute("INSERT INTO user (username, password, poids, taille) VALUES (?, ?, ?, ?)", [username, password, poids, taille], function(err, resu, fields) {
                 if (err) {
-                    res.status(500).send({"msg": "Error intern"})
+                    res.status(500).send({"msg": "Second call"})
                 }
                 const token = jwt.sign({ username: username }, secretKey);
                 res.json({ 'token': token });
@@ -160,10 +159,9 @@ app.post('/signin', async (req, res) => {
             });
         });
     } catch (err) {
-        res.status(500).send({"msg": "Error intern"})
+        res.status(500).send({"msg": "First call"})
     }
 });
-
 
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`)
