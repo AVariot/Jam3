@@ -5,7 +5,7 @@
         body {
             /* Ajoute un dégradé du vert clair au vert foncé */
             background: linear-gradient(to right, rgb(105, 209, 67), rgb(13, 105, 2));
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -36,6 +36,7 @@
         }
         #flame-icon {
             margin-right: 10px;
+            font-size: 2em;
         }
         #editable-text {
             margin-top: 100px;
@@ -46,6 +47,10 @@
             border-radius: 5px;
             font-size: 1em;
             color: #333;
+            transition: box-shadow 0.3s ease;
+        }
+        #editable-text:focus {
+            box-shadow: 0 0 10px #28a745;
         }
         #increment-button {
             margin-top: 20px;
@@ -65,14 +70,15 @@
     </style>
 </head>
 <body>
+    <img src="../images/joring.webp" width="500" height="300">
+    <textarea id="editable-text" placeholder="Tapez votre texte ici..."></textarea>
     <div id="header">
         <div id="flame">
             <div id="flame-icon">🔥</div>
             <div id="counter">0</div>
         </div>
     </div>
-    <textarea id="editable-text"></textarea>
-    <button id="increment-button">Incrémenter le compteur</button>
+    <button id="increment-button">Terminer l'entrainement</button>
 
     <script>
         let count = 0;
@@ -82,6 +88,23 @@
         incrementButton.addEventListener('click', function() {
             counterElement.textContent = ++count;
         });
+    </script>
+    <script>
+        fetch('./motivation.txt')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+    })
+    .then(data => {
+        const lines = data.split('\n');
+        const randomLine = lines[Math.floor(Math.random() * lines.length)];
+        document.getElementById('editable-text').value = randomLine;
+    })
+    .catch(e => {
+        console.log('There was a problem with your fetch operation: ' + e.message);
+    });
     </script>
 </body>
 </html>
