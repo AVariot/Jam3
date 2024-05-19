@@ -261,6 +261,7 @@
 </head>
 <body>
     <img src="../images/joring.webp" width="500" height="300">
+    <p id="motivation"></p>
     <textarea id="editable-text" placeholder="Tapez votre texte ici..."></textarea>
     <div id="header">
         <div id="flame">
@@ -293,24 +294,25 @@
 
         incrementButton.addEventListener('click', function() {
             counterElement.textContent = ++count;
+            window.location.href="../index.html";
         });
     </script>
     <script>
         fetch('./motivation.txt')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.text();
-    })
-    .then(data => {
-        const lines = data.split('\n');
-        const randomLine = lines[Math.floor(Math.random() * lines.length)];
-        document.getElementById('editable-text').value = randomLine;
-    })
-    .catch(e => {
-        console.log('There was a problem with your fetch operation: ' + e.message);
-    });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const lines = data.split('\n');
+                const randomLine = lines[Math.floor(Math.random() * lines.length)];
+                document.getElementById('motivation').textContent = randomLine;
+            })
+            .catch(e => {
+                console.log('There was a problem with your fetch operation: ' + e.message);
+            });
     </script>
 </body>
 </html>
