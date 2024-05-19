@@ -107,18 +107,60 @@ button:hover{
     </style>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 <script src="../func.js"></script>
+<script>
+async function signinFunction() {
+    // const username = document.getElementById("username_signin").value;
+    // const pass = document.getElementById("pass_signin").value;
+    // const taille = document.getElementById("taille_signin").value;
+    // const poids = document.getElementById("poids_signin").value;
+    // 
+    // try {
+    //     const token = await signinFetchFunction(username, pass, taille, poids);
+    //     if (token !== "") {
+    //         localStorage.setItem("token", token);
+    //     }
+    // } catch (error) {
+    //     console.error("Error during sign-in:", error);
+    // }
+	window.location.href = "../index.html";
+}
+
+// Assurez-vous que signinFetchFunction renvoie une promesse qui se résout avec le token
+async function signinFetchFunction(username, pass, taille, poids) {
+    try {
+        const response = await fetch("http://localhost:3000/signin", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, pass, taille, poids }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.token;
+    } catch (error) {
+        console.error("Error during fetch:", error);
+        throw error; // Propager l'erreur pour la gestion ultérieure
+    }
+}
+
+</script>
 </head>
 <body>
 	<div class="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true">
 
 			<div class="signup">
-				<form>
+				<form id="signinForm">
 					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="txt" placeholder="User name" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
-						<input type="text" name="smallText1" placeholder="Taille (cm)" required="">
-						<input type="text" name="smallText2" placeholder="Poids (Kg)" required="">
+					<input class="username_signin" id="username_signin" name="txt" placeholder="User name">
+					<input class="pass_signin" id="pass_signin" name="pswd" placeholder="Password">
+					<input class="taille_signin" id="taille_signin" name="smallText1" placeholder="Taille (cm)">
+					<input class="poids_signin" id="poids_signin" name="smallText2" placeholder="Poids (Kg)">
 					<button onclick="signinFunction()">Sign up</button>
 				</form>
 			</div>
