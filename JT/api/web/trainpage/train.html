@@ -257,8 +257,83 @@
             animation-iteration-count: infinite;
             animation-fill-mode: both;
         }
+
+/* Button animations */
+@-webkit-keyframes btn-content {
+  0% {
+    outline: 0.2em solid var(--color-background);
+    outline-offset: 0;
+  }
+}
+
+@keyframes btn-content {
+  0% {
+    outline: 0.2em solid var(--color-background);
+    outline-offset: 0;
+  }
+}
+
+
+button {
+ --color: #000000;
+ font-family: inherit;
+ display: inline-block;
+ width: 8em;
+ height: 2.6em;
+ line-height: 2.5em;
+ margin: 20px;
+ position: relative;
+ overflow: hidden;
+ border: 2px solid var(--color);
+ transition: color .5s;
+ z-index: 1;
+ font-size: 17px;
+ border-radius: 6px;
+ font-weight: 500;
+ color: var(--color);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* ajustez selon vos besoins */
+}
+
+
+button:before {
+ content: "";
+ position: absolute;
+ z-index: -1;
+ background: var(--color);
+ height: 150px;
+ width: 200px;
+ border-radius: 50%;
+}
+
+button:hover {
+ color: #ffffff;
+}
+
+button:before {
+ top: 100%;
+ left: 100%;
+ transition: all .7s;
+}
+
+button:hover:before {
+ top: -30px;
+ left: -30px;
+}
+
+button:active:before {
+ background: #3a0ca3;
+ transition: background 0s;
+}
+
     </style>
 </head>
+<script src="../func.js"></script>
 <body>
     <img src="../images/joring.webp" width="500" height="300">
     <p id="motivation"></p>
@@ -284,19 +359,15 @@
               </div>
         </div>
         <div id="counter">0</div>
-    </div>
-    <button id="increment-button">Terminer l'entrainement</button>
-
+    <button onclick="changePage()">HOME</button>
     <script>
-        let count = 0;
-        let counterElement = document.getElementById('counter');
-        let incrementButton = document.getElementById('increment-button');
-
-        incrementButton.addEventListener('click', function() {
-            counterElement.textContent = ++count;
-            window.location.href="../index.html";
-        });
+      function changePage() {
+        window.location.href = "../index.html";
+      }
     </script>
+    </div>
+    <button id="increment-button" onclick="setStreakNumber()">Terminer l'entrainement</button>
+
     <script>
         fetch('./motivation.txt')
             .then(response => {
@@ -314,5 +385,13 @@
                 console.log('There was a problem with your fetch operation: ' + e.message);
             });
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("load");
+            trainFunction();
+            getStreakNumber();
+        });
+    </script>
+
 </body>
 </html>

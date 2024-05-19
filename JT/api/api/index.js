@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const db = require('./config/db.js');
 const jwt = require('jsonwebtoken');
 const secretKey = 'a2f4b978b4e89347e906b7c16ae3d9f98d3f67d9ed9e7a2f9b5f4c8a56e3b2d4';
-const seance = require('./seance.query.js')
+const { create_seance } = require('./seance.query.js');
 const cors = require('cors');
 
 app.use(bodyParser.json());
@@ -17,31 +17,39 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.get('/streak', async (req, res) => {
-    const { token } = req.body;
+app.get('/train', async (req, res) => {
+    const name = req.body;
+
+    if (name === "Francis Ngannou") {
+        res.send({"v": ["dc", "butterfly", "curl", "dips", "squat"]});
+    } else {
+        res.send({"v": ["dc", "traction", "squat", "marteau", "tirage_pouli"]});
+    }
+})
+
+app.get('/getstreak', async (req, res) => {
+    const token = req.header('token');
+    console.log("token:", token)
     decoded = ""
     try {
         decoded = jwt.verify(token, secretKey);
     } catch (err) {
-        return res.status(500).send({"msg": "Error intern"})
+        return res.status(500).send({"msg": "decoded"})
     }
     const username = decoded["username"];
+    console.log("username::", username);
 
     db.execute("SELECT * FROM user WHERE username = ?", [username], function (err, resultat, fields) {
         if (err) {
             return res.status(500).send({"msg": "Error intern"})
         }
 
-        db.execute("INSERT INTO user (streak) VALUES (?)", (streak), function (err, resul, fields) {
-            if (err)
-                return res.status(500).send({"msg": "Error intern"})
-            return res.status(200).send({"streak": streak});
-        })
+        return res.status(200).send({"msg": resultat})
 
     })
 })
 
-app.post('/streak', async (req, res) => {
+app.post('/setstreak', async (req, res) => {
     const { token, streak } = req.body;
     decoded = ""
     try {
@@ -49,20 +57,16 @@ app.post('/streak', async (req, res) => {
     } catch (err) {
         return res.status(500).send({"msg": "Error intern"})
     }
+    
     const username = decoded["username"];
-
-    db.execute("SELECT * FROM user WHERE username = ?", [username], function (err, resultat, fields) {
-        if (err) {
-            return res.status(500).send({"msg": "Error intern"})
-        }
+    console.log("username::", username, ", STreak:", streak);
         
-        db.execute("INSERT INTO user (streak) VALUES (?)", (streak), function (err, resul, fields) {
-            if (err)
-                return res.status(500).send({"msg": "Error intern"})
-            return res.status(200).send({"msg": "Good"});
-        })
-
+    db.execute("UPDATE user SET streak = ? WHERE username = ?", [streak, username], function (err, resul, fields) {
+        if (err)
+            return res.status(500).send({"msg": "Error intern"})
+        return res.status(200).send({"msg": "Good"});
     })
+
 })
 
 app.post('/register_select', async (req, res) => {
@@ -75,18 +79,21 @@ app.post('/register_select', async (req, res) => {
     }
     const username = decoded["username"];
 
+    console.log("name: ", name);
+
     db.execute("SELECT * FROM user WHERE username = ?", [username], function (err, resultat, fields) {
         if (err) {
-            return res.status(500).send({"msg": "Error intern"})
+            return res.status(1).send({"msg": "Error intern"})
         }
         
-        const id = seance(name, db);
+        const id = create_seance(name);
         if (id == 84) {
             return res.status(501).send({"msg": "Option invalid"});
         }
-        db.execute("INSERT INTO user (exo_id) VALUES (?)", (id), function (err, resul, fields) {
+        console.log(id);
+        db.execute("INSERT INTO user SET exo_id = ? WHERE username = ?", [id, username], function (err, resul, fields) {
             if (err)
-                return res.status(500).send({"msg": "Error intern"})
+                return res.status(2).send({"msg": "Error intern"})
             return res.status(200).send({"msg": "Good"});
         })
 

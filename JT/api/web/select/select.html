@@ -214,6 +214,12 @@ button:active:before {
 
 
     </style>
+    <button onclick="changePage()">HOME</button>
+    <script>
+      function changePage() {
+        window.location.href = "../index.html";
+      }
+    </script>
 </head>
 <body>
     <div class="carousel">
@@ -247,8 +253,9 @@ button:active:before {
             <p>Entrainez-vous comme un athlete !</p>
 
             <img id="image" src="images/ngannou.webp">
-            <div class="name" id="name">Person 1</div>
-            <button> Select </button>
+            <div class="name" id="name-select">Person 1</div>
+            <button onclick="selectFunction()"> Select </button>
+            <script src="../func.js"></script>
         </div>
         <div class="btn-container">
             <a href="#" class="btn-content" id="next">
@@ -302,7 +309,7 @@ button:active:before {
 
         function updateImageAndName() {
             document.getElementById('image').src = images[index];
-            document.getElementById('name').textContent = names[index];
+            document.getElementById('name-select').textContent = names[index];
         }
 
         updateImageAndName();
