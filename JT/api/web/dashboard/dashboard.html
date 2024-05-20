@@ -52,11 +52,8 @@
                 imcStatus = 'poids insuffisant';
             } else if (imc >= 18.5 && imc < 24.9) {
                 imcStatus = 'poids normal';
-            } else if (imc >= 24.9 && imc < 29.9) {
+            } else
                 imcStatus = 'surpoids';
-            } else {
-                imcStatus = 'obésité';
-            }
 
             document.getElementById('imc-personnel').textContent = imc;
             document.getElementById('imc-status').textContent = imcStatus;
@@ -64,7 +61,52 @@
             document.getElementById('poids-ideal').textContent = `${poidsIdealMin} kg - ${poidsIdealMax} kg`;
         }
 
-        updateIMC(18.1, 60, 62.9, 79.5);
+        function infoFunction() {
+            try {
+                const token = localStorage.getItem("token");
+                console.log("MYTOKEN:", token)
+                if (!token) {
+                    console.error("Token not found in localStorage");
+                    return; // Arrêter la fonction si le token n'est pas trouvé
+                }
+        
+                // Construire l'URL avec les paramètres de requête
+                const url = new URL("http://localhost:3000/info");
+        
+                fetch(url, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "token": token
+                    },
+                })
+                .then(res => {
+                    return res.json();
+                })
+                .then(data => {
+                const arr = data["msg"][0]
+                console.log(arr);
+                const poids = arr["poids"];
+                const taille = arr["taille"] / 100; // convertir la taille en mètres
+
+                const imc = Math.round(poids / (taille * taille));
+                const poid_a_faire_min = Math.round(19 * (taille * taille));
+                const poid_a_faire_max = Math.round(25 * (taille * taille));
+                updateIMC(imc, arr["poids"], poid_a_faire_min, poid_a_faire_max);
+                })
+                .catch(error => {
+                    console.log("Error:", error);
+                });
+            } catch (error) {
+                console.error("Error during fetch:", error);
+                throw error;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            infoFunction();
+        });
+
     </script>
 </body>
 </html>

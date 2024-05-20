@@ -17,6 +17,26 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
+app.get('/info', async (req, res) => {
+    const token = req.headers["token"];
+    decoded = ""
+    try {
+        decoded = jwt.verify(token, secretKey);
+    } catch (err) {
+        return res.status(500).send({"msg": "decoded"})
+    }
+    const username = decoded["username"];
+
+    db.execute("SELECT * FROM user WHERE username = ?", [username], function (err, resultat, fields) {
+        if (err) {
+            return res.status(500).send({"msg": "Error intern"})
+        }
+
+        return res.status(200).send({"msg": resultat})
+
+    })    
+})
+
 app.get('/train', async (req, res) => {
     const name = req.body;
 
