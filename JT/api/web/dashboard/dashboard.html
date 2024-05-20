@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphique IMC</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Jost', sans-serif;
+            background: linear-gradient(to bottom, #0c291c, #2b6340, #243e2a);
+            color: white;
+            text-align: center;
+        }
+        .main {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 100px;
+            border-radius: 100px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 50px;
+        }
+        .text {
+            margin-bottom: 20px;
+        }
+        .info {
+            margin: 10px 0;
+        }
+    </style>
+</head> 
+<body>
+    <div class="main">
+        <div class="text">
+            <h1>IMC</h1>
+        </div>
+        <div class="info">
+            <p>Votre IMC personnel: <strong id="imc-personnel"></strong> (<span id="imc-status"></span>)</p>
+            <p>Votre IMC idéal: <strong>19 - 24</strong> (poids de santé)</p>
+            <p>Votre poids actuel: <strong id="poids-actuel"></strong></p>
+            <p>Votre poids idéal: <strong id="poids-ideal"></strong></p>
+        </div>
+    </div>
+
+    <script>
+        function updateIMC(imc, poidsActuel, poidsIdealMin, poidsIdealMax) {
+            let imcStatus = '';
+            if (imc < 18.5) {
+                imcStatus = 'poids insuffisant';
+            } else if (imc >= 18.5 && imc < 24.9) {
+                imcStatus = 'poids normal';
+            } else if (imc >= 24.9 && imc < 29.9) {
+                imcStatus = 'surpoids';
+            } else {
+                imcStatus = 'obésité';
+            }
+
+            document.getElementById('imc-personnel').textContent = imc;
+            document.getElementById('imc-status').textContent = imcStatus;
+            document.getElementById('poids-actuel').textContent = `${poidsActuel} kg`;
+            document.getElementById('poids-ideal').textContent = `${poidsIdealMin} kg - ${poidsIdealMax} kg`;
+        }
+
+        updateIMC(18.1, 60, 62.9, 79.5);
+    </script>
+</body>
+</html>
