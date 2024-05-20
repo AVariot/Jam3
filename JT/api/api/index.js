@@ -125,21 +125,16 @@ app.get('/select', async (req, res) => {
 })
 
 app.get('/login', async (req, res) => {
-    const { token } = req.body;
-    decoded = ""
-    try {
-        decoded = jwt.verify(token, secretKey);
-    } catch (err) {
-        return res.status(500).send({"msg": "Error intern"})
-    }
-    const username = decoded["username"];
+    const username = req.headers["username"];
+    console.log("username:", username)
 
     db.execute("SELECT * FROM user WHERE username = ?", [username], function (err, resultat, fields) {
         if (err) {
             return res.status(500).send({"msg": "Error intern"})
         }
         if (resultat.length >= 1) {
-            res.status(200).send({"msg": "ok"});
+            const token = jwt.sign({ username: username }, secretKey);
+            res.status(200).send({"msg": token});
         } else {
             res.status(403).send({"msg": "Forbiden"});
         }
@@ -161,7 +156,6 @@ app.post('/signin', async (req, res) => {
                     res.status(500).send({"msg": "Second call"})
                 }
                 const token = jwt.sign({ username: username }, secretKey);
-                res.json({ 'token': token });
                 res.status(200).send({"token": token});
             });
         });

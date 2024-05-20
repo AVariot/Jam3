@@ -69,7 +69,7 @@
                 <div class="navbar4-buttons">
                   <button class="thq-button-filled" onclick="location.href='login/Login.html';">Login</button>
                   <button class="thq-button-outline">
-                    <span>Logout</span>
+                    <span onclick="logoutFunction()">Logout</span>
                   </button>
                 </div>
                 </nav>
@@ -353,7 +353,7 @@
                       </p>
                     </div>
                     <span class="contact4-email thq-body-small">
-                      <span>JT@JrouneyTraining.com</span>
+                      <span>JT@JourneyTraining.com</span>
                     </span>
                   </div>
                 </div>
@@ -425,7 +425,7 @@
                         </div>
                         <button class="thq-button-outline footer15-button">
                           <span class="thq-body-small">
-                            <span href="404.html">Contactez-nous</span>
+                            <span onclick="errorPage()">Contactez-nous</span>
                           </span>
                         </button>
                       </div>
@@ -508,6 +508,14 @@
       src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
     ></script>
     <script>
+      function errorPage() {
+        window.location.href="404.html"
+      }
+      function logoutFunction() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("choice");
+      }
+
       document.getElementById('continueButton').addEventListener('click', function() {
         window.location.href = 'trainpage/train.html';
       });

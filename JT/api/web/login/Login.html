@@ -104,11 +104,90 @@ button:hover{
 	width: 45%; /* adjust as needed */
 }
 
-    </style>
+</style>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-<script src="../func.js"></script>
+<script>
+	function loginFetchFunction(username) {
+		try {
+			const url = new URL("http://localhost:3000/login");
+
+			fetch(url, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					"username": username,
+				},
+			})
+			.then(res => {
+				return res.json();
+			})
+			.then(data => {
+				console.log("token:", data);
+				const msg = data["msg"];
+				if (msg === "Forbiden")
+					return;
+				localStorage.setItem("token", msg);
+				window.location.href = "../index.html"
+			})
+			.catch(error => {
+				console.log("Error:", error);
+			});
+		} catch (error) {
+			console.error("Error during fetch:", error);
+			throw error;
+		}
+	}
+
+	function loginFunction() {
+		const username = document.getElementById("username_log").value;
+
+		try {
+			loginFetchFunction(username);
+		} catch (error) {
+			pass;
+		}
+	}
+
+	function signinFunction() {
+    const username = document.getElementById("username_signin").value;
+    const pass = document.getElementById("pass_signin").value;
+    const taille = document.getElementById("taille_signin").value;
+    const poids = document.getElementById("poids_signin").value;
+
+    try {
+        signinFetchFunction(username, pass, taille, poids);
+		window.location.href = "../index.html"
+    } catch (error) {
+        console.error("Error during sign-in:", error);
+    }
+}
+
+function signinFetchFunction(username, pass, taille, poids) {
+    try {
+        fetch("http://localhost:3000/signin", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ "username": username, "password": pass, "taille": taille, "poids": poids }),
+        })
+        .then(res => {
+            return res.json()
+        })
+        .then(data => {
+            localStorage.setItem("token", data["token"]);
+        })
+        .catch(error => {
+            console.log("Error")
+        })
+    } catch (error) {
+        console.error("Error during fetch:", error);
+        throw error;
+    }
+}
+</script>
 	<div class="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true">
 
@@ -125,9 +204,9 @@ button:hover{
 
 			<div class="login">
 				<label for="chk" aria-hidden="true">Login</label>
-				<input type="email" name="email" placeholder="Email" required="">
+				<input id="username_log" type="email" name="text" placeholder="username" required="">
 				<input type="password" name="pswd" placeholder="Password" required="">
-				<button>Login</button>
+				<button onclick="loginFunction()">Login</button>
 			</div>
 	</div>
 </body>
